@@ -1,23 +1,47 @@
-ofxAddonTemplate
+ofxKorgNanoKontrol v1
 ================
+![Korg Nano Kontrol version 1](http://www.mslinn.com/sites/mike/studio/instruments/Korg/nano/nanoKontrol/nanokontrolb.gif)
+If your device is version you can give a try <https://github.com/paulreimer/ofxNanoKontrol2> 
 
-OpenFrameworks addon template for easier development of structurally correct addons.
+There are differeneces between version 1 and version 2 in terms of MIDI control values. I couldn't make it work. So, I rewrite my own addon for version 1 device.
 
-This template aids you as an addon author in creating an addon in a "proper" way. Doing this enables the openFrameworks community to easily use your addon, and having addons adhere to an established structure makes it easier for the openFrameworks developers to create features around contributed addons, like the addons index at ofxaddons.com.
+Currently in development mode. public methods are listed in `ofxKorgNanoKontrol.h` file.
 
-Download
+For now, 
+
+`int getVal(int _control, int _type = SLIDER, int _sceneId = 1);` 
+
+method can be used to get values from Korg Nano Kontrol v1 usb midi device.
+
+
+E.g. 
+
+There 9x4 sliders, 9x4 potentiometers, 18x4 push buttons and 7 addional buttons to mange scenes and control all of the inputs on Korg Nano Kontrol. 
+
+So, if you want to get the first **slider** value 
+`_control` should be `0` as follows;
+
+`getVal(0)` returns int
+
+if you want to get the tenth **slider** value 
+`_control` should be `9` as follows;
+
+`getVal(9)` returns int
+
+if you want to get the first **potentiometer** value 
+`_control` should be `0` and `_type` should be `POT` as follows;
+
+`getVal(0,POT)` returns int
+
+Dependencies
 --------
-The template contains all you need to start developing your addon. Download the template using the Download button on the right side of the github page. Unzip, rename and copy it to your addons folder.
-**PLEASE DON'T FORK** the addon template repo if you plan on creating your own addon, this will lead to confusion on the Github inheritance/forking graph, and you will unnecessarily have this repository's history in your own git repo.
+ofxMidi - download the existing tag from <https://github.com/danomatika/ofxMidi/tree/0.8.4>
 
-Further Steps
+ofxKorgNanoKontrol is developped with of-0.84 and not tested with other releases of openframeworks
+
+todo
 -------------
-`readme_author.md` contains instructions and explanations for you.
-`readme_deploy.md` is filled with a template for an informative README file you might want to use with your addon.
-
-Before announcing your addon to the world, you should remove this file (`readme.md`) and the author instructions, and rename `readme_deploy.md` to `README.md`.
-Also, if you have special instructions which people should see when submitting a pull request or open an issue in your addon repository, add a `CONTRIBUTING.md` file at the root of your repository. For more details, see https://github.com/blog/1184-contributing-guidelines
-
-This template reflects the help text found at http://ofxaddons.com/howto, and will be updated from time to time by the OF developers.
-
-Thanks for listening, and happy coding!
+1. Example files
+2. basic gui
+3. tests on other platforms
+4. feedbacks from users
