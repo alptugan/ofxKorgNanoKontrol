@@ -364,7 +364,7 @@ void ofxKorgNanoKontrol::newMidiMessage(ofxMidiMessage& msg) {
         }
     }
     
-    cout << midiMessage.status << " " << midiMessage.control << " " << midiMessage.channel  << endl;
+    //cout << midiMessage.status << " " << midiMessage.control << " " << midiMessage.channel  << endl;
     //cout << sliderVals[0].val << midiMessage.control << " : " << midiMessage.channel << " : " << midiMessage.value << endl;
 }
 
