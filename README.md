@@ -36,13 +36,13 @@ if you want to get the first **potentiometer** value
 
 Dependencies
 --------
-ofxMidi - download the existing tag from <https://github.com/danomatika/ofxMidi/tree/0.8.4>
+1. ofxMidi - download the existing tag from <https://github.com/danomatika/ofxMidi/tree/0.8.4>
 
-ofxKorgNanoKontrol is developped with of-0.84 and not tested with other releases of openframeworks
+2. ofxKorgNanoKontrol is developped with of-0.84 and not tested with other releases of openframeworks
+
+3. If you get failed build messages related with MIDI libs, you should add system CoreMIDI framework. Click [here](https://vimeo.com/124147456) to see how to add.
 
 todo
 -------------
-1. Example files
-2. basic gui
-3. tests on other platforms
-4. feedbacks from users
+1. tests on other platforms
+2. feedbacks from users
