@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ofMain.h"
 #include "ofxMidi.h"
 #include "ofxKorgNanoKontrolConstants.h"
 
@@ -100,12 +101,17 @@ public:
     int getVal(int _control, int _type = SLIDER, int _sceneId = 1);
     
     void setup(bool autoSet = false, int _portNum = 0);
+    void showGui(bool _showGui);
 
+    ofEvent<int> sceneButtonPressed;
+    
     
 private:
     ofxMidiIn midiIn;
+    ofxMidiOut midiOut;
     ofxMidiMessage midiMessage;
-
+    
+    
     
     KONTROL_VERSION version; // KONTROL or KONTROL2
     
@@ -119,5 +125,16 @@ private:
     vector<Object> buttonVals;
     vector<Object> kontrolVals;
     int sceneIdCounter;
+    
+    bool sceneButton;
+    
+    // GUI related
+    
+    int ySpace;
+    int yPosMult;
+    int yStartPos;
+    
+    int xPosMult;
+    
     
 };

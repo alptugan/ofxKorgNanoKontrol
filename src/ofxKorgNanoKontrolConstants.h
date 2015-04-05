@@ -1,18 +1,21 @@
 #pragma once
 
 #define K_PREVIOUS 0
-#define K_NEXT 2
 #define K_PLAY 1
+#define K_NEXT 2
 #define K_REPEAT 3
 #define K_STOP 4
 #define K_RECORD 5
 #define K_SCENE 6
+
+#define SCENE_BUTTON_PRESSED
 
 
 // Type
 #define SLIDER 0
 #define POT 1
 #define BUTTON 2
+#define MENU_BUTTONS 3
 
 // Sliders
 #define K_SLIDER_1 0

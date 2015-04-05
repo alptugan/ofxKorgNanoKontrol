@@ -27,6 +27,14 @@ void ofxKorgNanoKontrol::setup(bool autoSet, int _portNum) {
         portNum = _portNum;
     }
     
+    sceneButton = false;
+    
+    // GUI related
+    ySpace = 170;
+    yPosMult = 0;
+    yStartPos = 220;
+    xPosMult = 0;
+    
     
     midiIn.openPort(portNum);
     
@@ -39,6 +47,7 @@ void ofxKorgNanoKontrol::setup(bool autoSet, int _portNum) {
     
     // print received messages to the console
     midiIn.setVerbose(true);
+    
     
     //cout << nanoKontrolAxisMapping[0] << endl;
     
@@ -99,6 +108,176 @@ void ofxKorgNanoKontrol::setup(bool autoSet, int _portNum) {
     
 }
 
+
+void ofxKorgNanoKontrol::showGui(bool _showGui) {
+    if(_showGui) {
+        ofSetColor(0);
+        
+        ofPushMatrix();
+        ofTranslate(0, 0);
+        
+        ofFill();
+        ofSetColor(0, 0, 0, 100);
+        ofRect(0, 0, 548, 740);
+        
+        for (int i = 0; i < 36; i++) {
+            if(i > 8) {
+                yPosMult = 1;
+                xPosMult = 9;
+            }else{
+                yPosMult = 0;
+                xPosMult = 0;
+            }
+            
+            if(i > 17) {
+                yPosMult = 2;
+                xPosMult = 18;
+            }
+            
+            if(i > 26) {
+                yPosMult = 3;
+                xPosMult = 27;
+            }
+            
+            // Sliders
+            
+            ofSetColor(0);
+            ofDrawBitmapString("P." + ofToString(i+1), ofPoint(60 * (i - xPosMult) + 30, (yStartPos - 15) + ySpace*yPosMult));
+            ofFill();
+            ofRect(60 * (i - xPosMult) + 30, (yStartPos - 30) + ySpace*yPosMult, 23, ofMap(-getVal(i),0,127,0,84));
+            ofNoFill();
+            ofRect(60 * (i - xPosMult) + 30, (yStartPos - 30) + ySpace*yPosMult - 84, 23, 84);
+            
+            ofFill();
+            
+            
+            // Potentiometers
+            ofPushMatrix();
+            ofTranslate(13 + 60 * (i - xPosMult) + 30, (yStartPos - 134) + ySpace*yPosMult);
+            
+            ofRotate((ofMap(getVal(i,POT), 0, 127, 0, 240)));
+            
+            ofCircle(0,0, 13);
+            ofSetColor(255);
+            
+            ofTranslate(-8, 5);
+            ofCircle(0, 0, 1);
+            
+            ofPopMatrix();
+            
+            
+        }
+        
+        for (int i = 0; i < 72; i++) {
+            if(i > 17) {
+                yPosMult = 2;
+                xPosMult = 18;
+            }else{
+                yPosMult = 0;
+                xPosMult = 0;
+            }
+            
+            if(i > 35) {
+                yPosMult = 4;
+                xPosMult = 36;
+            }
+            
+            if(i > 53) {
+                yPosMult = 6;
+                xPosMult = 54;
+            }
+            
+            // Buttons
+            ofSetColor(0);
+            if(getVal(i,BUTTON) > 0)
+                ofFill();
+            else
+                ofNoFill();
+            
+            if(i % 2 == 0) {
+                ofRect(30 * (i - xPosMult) + 10,  (yStartPos - 30) + ySpace*yPosMult/2 - 84, 14, 14);
+            }else{
+                ofRect(30 * (i-1 - xPosMult) + 10,18 + (yStartPos - 30) + ySpace*yPosMult/2 - 84, 14, 14);
+            }
+            
+            
+            ofNoFill();
+            
+        }
+        
+        int yPosAdd = 24;
+        // Addional Buttons
+        if(getVal(0,MENU_BUTTONS) > 0)
+            ofFill();
+        else
+            ofNoFill();
+        ofSetColor(0);
+        ofRect(10, 10, 50, 20);
+        ofSetColor(255);
+        ofDrawBitmapString("prev", 20, yPosAdd);
+        
+        
+        if(getVal(1,MENU_BUTTONS) > 0)
+            ofFill();
+        else
+            ofNoFill();
+        ofSetColor(0);
+        ofRect(63, 10, 50, 20);
+        ofSetColor(255);
+        ofDrawBitmapString("play", 72, yPosAdd);
+        
+        
+        if(getVal(2,MENU_BUTTONS) > 0)
+            ofFill();
+        else
+            ofNoFill();
+        ofSetColor(0);
+        ofRect(116, 10, 50, 20);
+        ofSetColor(255);
+        ofDrawBitmapString("next", 125, yPosAdd);
+        
+        if(getVal(3,MENU_BUTTONS) > 0)
+            ofFill();
+        else
+            ofNoFill();
+        ofSetColor(0);
+        ofRect(10, 33, 50, 20);
+        ofSetColor(255);
+        ofDrawBitmapString("loop", 20, yPosAdd + 23);
+        
+        if(getVal(4,MENU_BUTTONS) > 0)
+            ofFill();
+        else
+            ofNoFill();
+        ofSetColor(0);
+        ofRect(63, 33, 50, 20);
+        ofSetColor(255);
+        ofDrawBitmapString("stop", 72, yPosAdd + 23);
+        
+        if(getVal(5,MENU_BUTTONS) > 0)
+            ofFill();
+        else
+            ofNoFill();
+        ofSetColor(0);
+        ofRect(116, 33, 50, 20);
+        ofSetColor(255);
+        ofDrawBitmapString("rec", 128, yPosAdd + 23);
+        
+        /*
+        if(getVal(6,MENU_BUTTONS))
+            ofFill();
+        else
+            ofNoFill();
+        ofSetColor(0);
+        ofRect(186, 10, 50, 20);
+        ofSetColor(255);
+        ofDrawBitmapString("scene", 191, yPosAdd);
+        ofPopMatrix();
+         */
+    }else{
+        return;
+    }
+}
 /***********************************/
 /* Return nanoKONTROL attached port number */
 /***********************************/
@@ -145,8 +324,7 @@ void ofxKorgNanoKontrol::newMidiMessage(ofxMidiMessage& msg) {
     cout << "delta: " << midiMessage.deltatime << endl;
     */
     
-    //cout << "channel: " << midiMessage.channel << endl;
-    //cout << "control: " << midiMessage.control << endl;
+    // Slider Handler
     for (int i = 0; i < sliderVals.size(); i++) {
         
         if(midiMessage.channel == sliderVals[i].scene && midiMessage.control == sliderVals[i].midiId) {
@@ -159,15 +337,35 @@ void ofxKorgNanoKontrol::newMidiMessage(ofxMidiMessage& msg) {
         }
     }
     
+    // Button Handler
     for (int i = 0; i < buttonVals.size(); i++) {
         if(midiMessage.channel == buttonVals[i].scene && midiMessage.control == buttonVals[i].midiId) {
             buttonVals[i].val = midiMessage.value;
-            cout << buttonVals[i].val << " : " << buttonVals[i].scene << " : " << buttonVals[i].midiId << " : " << i << endl;
-            
+            //cout << buttonVals[i].val << " : " << buttonVals[i].scene << " : " << buttonVals[i].midiId << " : " << i << endl;
         }
     }
     
-    cout << midiMessage.control << " : " << midiMessage.channel << " : " << midiMessage.value << endl;
+    
+    // Addional Handler
+    for (int i = 0; i < kontrolVals.size(); i++) {
+        if(midiMessage.channel == kontrolVals[i].scene && midiMessage.control == kontrolVals[i].midiId) {
+            kontrolVals[i].val = midiMessage.value;
+            //
+            // The last one is the SCENE button on KORG Nano Kontrol. It sends 0, so set it manually to get message
+            if(i == 6 && midiMessage.value == 0) {
+                ofNotifyEvent(sceneButtonPressed, midiMessage.value, this);
+                //sceneButton = !sceneButton;
+                //kontrolVals[i].val = sceneButton;
+            }else{
+                //sceneButton = !sceneButton;
+                //kontrolVals[i].val = sceneButton;
+            }
+            //cout << kontrolVals[i].val << " : " << kontrolVals[i].scene << " : " << kontrolVals[i].midiId << " : " << i << endl;
+        }
+    }
+    
+    cout << midiMessage.status << " " << midiMessage.control << " " << midiMessage.channel  << endl;
+    //cout << sliderVals[0].val << midiMessage.control << " : " << midiMessage.channel << " : " << midiMessage.value << endl;
 }
 
 int ofxKorgNanoKontrol::getVal(int _control,int _type, int _sceneId) {
@@ -198,6 +396,9 @@ int ofxKorgNanoKontrol::getVal(int _control,int _type, int _sceneId) {
     
     if(_type == BUTTON)
         return buttonVals[_control].val;
+    
+    if(_type == MENU_BUTTONS)
+        return kontrolVals[_control].val;
 }
 
 int ofxKorgNanoKontrol::getSliderVal(int _control,int _sceneId) {
