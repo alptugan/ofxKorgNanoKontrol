@@ -10,7 +10,7 @@ Currently in development mode. public methods are listed in `ofxKorgNanoKontrol.
 
 For now, 
 
-`int getVal(int _control, int _type = SLIDER, int _sceneId = 1);` 
+`int getVal(int _control, int _type = K_TYPE_SLIDER, int _sceneId = K_SCENE_1);` 
 
 method can be used to get values from Korg Nano Kontrol v1 usb midi device.
 
@@ -19,21 +19,44 @@ E.g.
 
 There 9x4 sliders, 9x4 potentiometers, 18x4 push buttons and 7 addional buttons to mange scenes and control all of the inputs on Korg Nano Kontrol. 
 
-So, if you want to get the first **slider** value 
-`_control` should be `0` as follows;
+#####So, if you want to get the first *slider* value 
+`_control` should be `0` or `K_SLIDER_1` as follows;
 
-`getVal(0)` returns int
+`getVal(0)` returns int value from 0 to 127
 
-if you want to get the tenth **slider** value 
-`_control` should be `9` as follows;
+or
 
-`getVal(9)` returns int
+`getVal(K_SLIDER_1)` returns int value from 0 to 127
 
-if you want to get the first **potentiometer** value 
-`_control` should be `0` and `_type` should be `POT` as follows;
+---------------------------------
 
-`getVal(0,POT)` returns int
 
+#####if you want to get the tenth(Actually it's the first slider of Scene 2) *slider* value
+
+`_control` should be `0`, `_type` should be `K_TYPE_SLIDER` and `_sceneId` should be `K_SCENE_2` as 
+follows;
+
+`getVal(0,K_TYPE_SLIDER,K_SCENE_2)` returns int value from 0 to 127
+  
+
+or
+
+`getVal(K_SLIDER_1,K_TYPE_SLIDER,K_SCENE_2)` returns int value from 0 to 127
+
+-------------
+
+
+
+#####if you want to get the first *potentiometer* value 
+`_control` should be `0` and `_type` should be `K_TYPE_POT` as follows;
+
+`getVal(0,K_TYPE_POT)` returns int value from 0 to 127
+
+or
+
+`getVal(K_POT_1,K_TYPE_POT)` returns int value from 0 to 127
+
+---
 Dependencies
 --------
 1. ofxMidi - download the existing tag from <https://github.com/danomatika/ofxMidi/tree/0.8.4>
