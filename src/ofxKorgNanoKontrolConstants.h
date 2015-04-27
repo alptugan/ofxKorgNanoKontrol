@@ -10,12 +10,18 @@
 
 #define SCENE_BUTTON_PRESSED
 
+// Scene
+#define K_SCENE_1 1
+#define K_SCENE_2 2
+#define K_SCENE_3 3
+#define K_SCENE_4 4
+
 
 // Type
-#define SLIDER 0
-#define POT 1
-#define BUTTON 2
-#define MENU_BUTTONS 3
+#define K_TYPE_SLIDER 0
+#define K_TYPE_POT 1
+#define K_TYPE_BUTTON 2
+#define K_TYPE_MENU_BUTTONS 3
 
 // Sliders
 #define K_SLIDER_1 0

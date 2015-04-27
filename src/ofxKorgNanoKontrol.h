@@ -40,6 +40,12 @@ static int potentiometers_v1[] = {14,15,16,17,18,19,20,21,22,
 static int kontrol_v1[] = {47,45,48,49,46,44,0};
 
 /*
+
+Info about MIDI values on Korg Nano Kontrol Version 1
+Channel value doesn't change by Scene button until 4th scene by default
+You can fix it via Korg's Nano Kontrol Editor software
+For the best practise I implemented to default values.
+ 
 scene 4
 slider list
  
@@ -98,7 +104,9 @@ public:
     int getSliderVal(int _control,int _sceneId = 1);
     int getPotVal(int _control,int _sceneId = 1);
     int getButtonVal(int _control,int _sceneId = 1);
-    int getVal(int _control, int _type = SLIDER, int _sceneId = 1);
+    
+    
+    int getVal(int _control, int _type = K_TYPE_SLIDER, int _sceneId = 1);
     
     void setup(bool autoSet = false, int _portNum = 0);
     void showGui(bool _showGui);

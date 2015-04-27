@@ -147,7 +147,6 @@ void ofxKorgNanoKontrol::showGui(bool _showGui) {
             ofRect(60 * (i - xPosMult) + 30, (yStartPos - 30) + ySpace*yPosMult, 23, ofMap(-getVal(i),0,127,0,84));
             ofNoFill();
             ofRect(60 * (i - xPosMult) + 30, (yStartPos - 30) + ySpace*yPosMult - 84, 23, 84);
-            
             ofFill();
             
             
@@ -155,8 +154,9 @@ void ofxKorgNanoKontrol::showGui(bool _showGui) {
             ofPushMatrix();
             ofTranslate(13 + 60 * (i - xPosMult) + 30, (yStartPos - 134) + ySpace*yPosMult);
             
-            ofRotate((ofMap(getVal(i,POT), 0, 127, 0, 240)));
+            ofRotate((ofMap(getVal(i,K_TYPE_POT), 0, 127, 0, 240)));
             
+            ofSetCircleResolution(22);
             ofCircle(0,0, 13);
             ofSetColor(255);
             
@@ -189,7 +189,7 @@ void ofxKorgNanoKontrol::showGui(bool _showGui) {
             
             // Buttons
             ofSetColor(0);
-            if(getVal(i,BUTTON) > 0)
+            if(getVal(i,K_TYPE_BUTTON) > 0)
                 ofFill();
             else
                 ofNoFill();
@@ -201,13 +201,13 @@ void ofxKorgNanoKontrol::showGui(bool _showGui) {
             }
             
             
-            ofNoFill();
+           // ofNoFill();
             
         }
         
         int yPosAdd = 24;
         // Addional Buttons
-        if(getVal(0,MENU_BUTTONS) > 0)
+        if(getVal(0,K_TYPE_MENU_BUTTONS) > 0)
             ofFill();
         else
             ofNoFill();
@@ -217,7 +217,7 @@ void ofxKorgNanoKontrol::showGui(bool _showGui) {
         ofDrawBitmapString("prev", 20, yPosAdd);
         
         
-        if(getVal(1,MENU_BUTTONS) > 0)
+        if(getVal(1,K_TYPE_MENU_BUTTONS) > 0)
             ofFill();
         else
             ofNoFill();
@@ -227,7 +227,7 @@ void ofxKorgNanoKontrol::showGui(bool _showGui) {
         ofDrawBitmapString("play", 72, yPosAdd);
         
         
-        if(getVal(2,MENU_BUTTONS) > 0)
+        if(getVal(2,K_TYPE_MENU_BUTTONS) > 0)
             ofFill();
         else
             ofNoFill();
@@ -236,7 +236,7 @@ void ofxKorgNanoKontrol::showGui(bool _showGui) {
         ofSetColor(255);
         ofDrawBitmapString("next", 125, yPosAdd);
         
-        if(getVal(3,MENU_BUTTONS) > 0)
+        if(getVal(3,K_TYPE_MENU_BUTTONS) > 0)
             ofFill();
         else
             ofNoFill();
@@ -245,7 +245,7 @@ void ofxKorgNanoKontrol::showGui(bool _showGui) {
         ofSetColor(255);
         ofDrawBitmapString("loop", 20, yPosAdd + 23);
         
-        if(getVal(4,MENU_BUTTONS) > 0)
+        if(getVal(4,K_TYPE_MENU_BUTTONS) > 0)
             ofFill();
         else
             ofNoFill();
@@ -254,7 +254,7 @@ void ofxKorgNanoKontrol::showGui(bool _showGui) {
         ofSetColor(255);
         ofDrawBitmapString("stop", 72, yPosAdd + 23);
         
-        if(getVal(5,MENU_BUTTONS) > 0)
+        if(getVal(5,K_TYPE_MENU_BUTTONS) > 0)
             ofFill();
         else
             ofNoFill();
@@ -388,16 +388,16 @@ int ofxKorgNanoKontrol::getVal(int _control,int _type, int _sceneId) {
     
     }
     
-    if(_type == SLIDER)
+    if(_type == K_TYPE_SLIDER)
         return sliderVals[_control].val;
     
-    if(_type == POT)
+    if(_type == K_TYPE_POT)
         return potVals[_control].val;
     
-    if(_type == BUTTON)
+    if(_type == K_TYPE_BUTTON)
         return buttonVals[_control].val;
     
-    if(_type == MENU_BUTTONS)
+    if(_type == K_TYPE_MENU_BUTTONS)
         return kontrolVals[_control].val;
 }
 
