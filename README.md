@@ -2,9 +2,9 @@ ofxKorgNanoKontrol v1
 ================
 ![Korg Nano Kontrol version 1](http://www.mslinn.com/sites/mike/studio/instruments/Korg/nano/nanoKontrol/nanokontrolb.gif)
 
-If your device is version 1 you can give a try <https://github.com/paulreimer/ofxNanoKontrol2> 
+If your device generation is different, you can give a try <https://github.com/paulreimer/ofxNanoKontrol2> 
 
-There are differeneces between version 1 and version 2 in terms of MIDI control values. I couldn't make it work. So, I rewrite my own addon for version 1 device.
+There are differeneces between version 1 and version 2 in terms of MIDI control values. I couldn't make ofxNanoKontrol2 aadon work. So, I created my own addon for version 1 devices.
 
 Currently in development mode. public methods are listed in `ofxKorgNanoKontrol.h` file.
 
