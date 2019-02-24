@@ -56,7 +56,6 @@ void ofxKorgNanoKontrol::setup(bool autoSet, int _portNum) {
     
     sceneIdCounter = 1;
     
-    //cout << "size : " << sizeof(sliders_v1) / sizeof(int) << endl;
     
     for (int i = 0; i < sizeof(sliders_v1) / sizeof(int); i++) {
         
@@ -111,14 +110,14 @@ void ofxKorgNanoKontrol::setup(bool autoSet, int _portNum) {
 
 void ofxKorgNanoKontrol::showGui(bool _showGui) {
     if(_showGui) {
-        ofSetColor(0);
+        ofSetColor(255);
         
         ofPushMatrix();
         ofTranslate(0, 0);
         
         ofFill();
-        ofSetColor(0, 0, 0, 100);
-        ofRect(0, 0, 548, 740);
+        ofSetColor(255, 100);
+        ofDrawRectangle(0, 0, 548, 740);
         
         for (int i = 0; i < 36; i++) {
             if(i > 8) {
@@ -144,9 +143,9 @@ void ofxKorgNanoKontrol::showGui(bool _showGui) {
             ofSetColor(0);
             ofDrawBitmapString("P." + ofToString(i+1), ofPoint(60 * (i - xPosMult) + 30, (yStartPos - 15) + ySpace*yPosMult));
             ofFill();
-            ofRect(60 * (i - xPosMult) + 30, (yStartPos - 30) + ySpace*yPosMult, 23, ofMap(-getVal(i),0,127,0,84));
+            ofDrawRectangle(60 * (i - xPosMult) + 30, (yStartPos - 30) + ySpace*yPosMult, 23, ofMap(-getVal(i),0,127,0,84));
             ofNoFill();
-            ofRect(60 * (i - xPosMult) + 30, (yStartPos - 30) + ySpace*yPosMult - 84, 23, 84);
+            ofDrawRectangle(60 * (i - xPosMult) + 30, (yStartPos - 30) + ySpace*yPosMult - 84, 23, 84);
             ofFill();
             
             
@@ -157,17 +156,16 @@ void ofxKorgNanoKontrol::showGui(bool _showGui) {
             ofRotate((ofMap(getVal(i,K_TYPE_POT), 0, 127, 0, 240)));
             
             ofSetCircleResolution(22);
-            ofCircle(0,0, 13);
+            ofDrawCircle(0,0, 13);
             ofSetColor(255);
             
             ofTranslate(-8, 5);
-            ofCircle(0, 0, 1);
+            ofDrawCircle(0, 0, 1);
             
             ofPopMatrix();
             
             
         }
-        
         for (int i = 0; i < 72; i++) {
             if(i > 17) {
                 yPosMult = 2;
@@ -194,10 +192,15 @@ void ofxKorgNanoKontrol::showGui(bool _showGui) {
             else
                 ofNoFill();
             
+            
+            
+            
             if(i % 2 == 0) {
-                ofRect(30 * (i - xPosMult) + 10,  (yStartPos - 30) + ySpace*yPosMult/2 - 84, 14, 14);
+                ofDrawRectangle(30 * (i - xPosMult) + 10,  (yStartPos - 30) + ySpace*yPosMult/2 - 84, 14, 14);
+                ofDrawBitmapStringHighlight(ofToString(i), 30 * (i - xPosMult) + 10,(yStartPos - 30) + ySpace*yPosMult/2 - 84);
             }else{
-                ofRect(30 * (i-1 - xPosMult) + 10,18 + (yStartPos - 30) + ySpace*yPosMult/2 - 84, 14, 14);
+                ofDrawRectangle(30 * (i-1 - xPosMult) + 10,18 + (yStartPos - 30) + ySpace*yPosMult/2 - 84, 14, 14);
+                ofDrawBitmapStringHighlight(ofToString(i), 30 * (i - xPosMult) + 10,18 + (yStartPos - 30) + ySpace*yPosMult/2 - 84);
             }
             
             
@@ -212,7 +215,7 @@ void ofxKorgNanoKontrol::showGui(bool _showGui) {
         else
             ofNoFill();
         ofSetColor(0);
-        ofRect(10, 10, 50, 20);
+        ofDrawRectangle(10, 10, 50, 20);
         ofSetColor(255);
         ofDrawBitmapString("prev", 20, yPosAdd);
         
@@ -222,7 +225,7 @@ void ofxKorgNanoKontrol::showGui(bool _showGui) {
         else
             ofNoFill();
         ofSetColor(0);
-        ofRect(63, 10, 50, 20);
+        ofDrawRectangle(63, 10, 50, 20);
         ofSetColor(255);
         ofDrawBitmapString("play", 72, yPosAdd);
         
@@ -232,7 +235,7 @@ void ofxKorgNanoKontrol::showGui(bool _showGui) {
         else
             ofNoFill();
         ofSetColor(0);
-        ofRect(116, 10, 50, 20);
+        ofDrawRectangle(116, 10, 50, 20);
         ofSetColor(255);
         ofDrawBitmapString("next", 125, yPosAdd);
         
@@ -241,7 +244,7 @@ void ofxKorgNanoKontrol::showGui(bool _showGui) {
         else
             ofNoFill();
         ofSetColor(0);
-        ofRect(10, 33, 50, 20);
+        ofDrawRectangle(10, 33, 50, 20);
         ofSetColor(255);
         ofDrawBitmapString("loop", 20, yPosAdd + 23);
         
@@ -250,7 +253,7 @@ void ofxKorgNanoKontrol::showGui(bool _showGui) {
         else
             ofNoFill();
         ofSetColor(0);
-        ofRect(63, 33, 50, 20);
+        ofDrawRectangle(63, 33, 50, 20);
         ofSetColor(255);
         ofDrawBitmapString("stop", 72, yPosAdd + 23);
         
@@ -259,7 +262,7 @@ void ofxKorgNanoKontrol::showGui(bool _showGui) {
         else
             ofNoFill();
         ofSetColor(0);
-        ofRect(116, 33, 50, 20);
+        ofDrawRectangle(116, 33, 50, 20);
         ofSetColor(255);
         ofDrawBitmapString("rec", 128, yPosAdd + 23);
         
@@ -321,26 +324,28 @@ void ofxKorgNanoKontrol::newMidiMessage(ofxMidiMessage& msg) {
     cout << "velocity: " << midiMessage.velocity << endl;
     cout << "control: " << midiMessage.control << endl;
     cout << "value : " << msg.value << endl;
-    cout << "delta: " << midiMessage.deltatime << endl;
-    */
+    cout << "delta: " << midiMessage.deltatime << endl;*/
+    
     
     // Slider Handler
     for (int i = 0; i < sliderVals.size(); i++) {
         
         if(midiMessage.channel == sliderVals[i].scene && midiMessage.control == sliderVals[i].midiId) {
             sliderVals[i].val = midiMessage.value;
+            ofNotifyEvent(sliderValChanged, midiMessage.value, this);
         }
         
         
         if(midiMessage.channel == potVals[i].scene && midiMessage.control == potVals[i].midiId) {
             potVals[i].val = midiMessage.value;
+            ofNotifyEvent(potValChanged, midiMessage.value, this);
         }
     }
-    
     // Button Handler
     for (int i = 0; i < buttonVals.size(); i++) {
         if(midiMessage.channel == buttonVals[i].scene && midiMessage.control == buttonVals[i].midiId) {
             buttonVals[i].val = midiMessage.value;
+            ofNotifyEvent(pushButtonPressed, midiMessage.value, this);
             //cout << buttonVals[i].val << " : " << buttonVals[i].scene << " : " << buttonVals[i].midiId << " : " << i << endl;
         }
     }
