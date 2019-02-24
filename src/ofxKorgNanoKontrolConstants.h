@@ -59,6 +59,9 @@
 #define K_BUTTON_15 14
 #define K_BUTTON_16 15
 
+#define K_BUTTON_17 15
+#define K_BUTTON_18 16
+
 // Potentiometers
 #define K_POT_1 0
 #define K_POT_2 1

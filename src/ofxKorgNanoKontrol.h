@@ -112,7 +112,9 @@ public:
     void showGui(bool _showGui);
 
     ofEvent<int> sceneButtonPressed;
-    
+    ofEvent<int> pushButtonPressed;
+    ofEvent<int> sliderValChanged;
+    ofEvent<int> potValChanged;
     
 private:
     ofxMidiIn midiIn;
