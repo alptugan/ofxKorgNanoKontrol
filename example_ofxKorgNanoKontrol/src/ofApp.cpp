@@ -8,7 +8,7 @@ void ofApp::setup(){
     //nano.getListMidiDevices();
     nano.setup(true);
     
-    kontrolGui = false;
+    kontrolGui = true;
     ofAddListener(nano.sceneButtonPressed, this, &ofApp::sceneButtonPressed);
 }
 
@@ -49,7 +49,7 @@ void ofApp::draw(){
     
     
     
-    ofCircle(xpos,ypos,rad);
+    ofDrawCircle(xpos,ypos,rad);
     
     //cout << "nano.getVal(K_SLIDER_1): " << nano.getVal(K_SLIDER_1) << endl;
     //cout << "nano.getVal(K_POT_1,K_TYPE_POT,K_SCENE_1): " << nano.getVal(K_POT_1,K_TYPE_POT) << endl;
@@ -58,7 +58,7 @@ void ofApp::draw(){
     ofDrawBitmapStringHighlight("Korg Nano Kontrol Version 1 - Press 'g' to show/hide gui", ofPoint(20,20));
     
     // Show/hide gui
-    nano.showGui(kontrolGui ? true : false);
+    nano.showGui(kontrolGui, 0, 25);
 }
 
 //--------------------------------------------------------------

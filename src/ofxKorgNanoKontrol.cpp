@@ -108,12 +108,12 @@ void ofxKorgNanoKontrol::setup(bool autoSet, int _portNum) {
 }
 
 
-void ofxKorgNanoKontrol::showGui(bool _showGui) {
+void ofxKorgNanoKontrol::showGui(bool _showGui, int posX, int posY) {
     if(_showGui) {
         ofSetColor(255);
         
         ofPushMatrix();
-        ofTranslate(0, 0);
+        ofTranslate(posX, posY);
         
         ofFill();
         ofSetColor(255, 100);
@@ -153,8 +153,8 @@ void ofxKorgNanoKontrol::showGui(bool _showGui) {
             ofPushMatrix();
             ofTranslate(13 + 60 * (i - xPosMult) + 30, (yStartPos - 134) + ySpace*yPosMult);
             
-            ofRotate((ofMap(getVal(i,K_TYPE_POT), 0, 127, 0, 240)));
-            
+            ofRotateDeg((ofMap(getVal(i,K_TYPE_POT), 0, 127, 0, 240)));
+
             ofSetCircleResolution(22);
             ofDrawCircle(0,0, 13);
             ofSetColor(255);
@@ -191,9 +191,6 @@ void ofxKorgNanoKontrol::showGui(bool _showGui) {
                 ofFill();
             else
                 ofNoFill();
-            
-            
-            
             
             if(i % 2 == 0) {
                 ofDrawRectangle(30 * (i - xPosMult) + 10,  (yStartPos - 30) + ySpace*yPosMult/2 - 84, 14, 14);
@@ -275,8 +272,8 @@ void ofxKorgNanoKontrol::showGui(bool _showGui) {
         ofRect(186, 10, 50, 20);
         ofSetColor(255);
         ofDrawBitmapString("scene", 191, yPosAdd);
-        ofPopMatrix();
          */
+        ofPopMatrix();
     }else{
         return;
     }
@@ -285,13 +282,14 @@ void ofxKorgNanoKontrol::showGui(bool _showGui) {
 /* Return nanoKONTROL attached port number */
 /***********************************/
 int ofxKorgNanoKontrol::findKontrolPort() {
-    unsigned int nPorts = midiIn.getNumPorts();
+    unsigned int nPorts = midiIn.getNumInPorts();
+    //ofLog() << "midiIn.getInPortList() :" << midiIn.getInPortList().size() << "---"<< nPorts << endl;
     std::string portName;
     
     for ( uint i=0; i < nPorts; i++ ) {
-        portName = midiIn.getPortName(i);
+        portName = midiIn.getInPortName(i);
         if(portName.find("nanoKONTROL") != std::string::npos) {
-            cout << "Defaulting to port " << i << endl;
+            cout << "Set Default MIDI port 0" << i << endl;
             return i;
         }
     }
@@ -308,9 +306,9 @@ int ofxKorgNanoKontrol::findKontrolPort() {
 void ofxKorgNanoKontrol::getListMidiDevices() {
     
     // print input ports to console
-    unsigned int nPorts = midiIn.getNumPorts();
+    unsigned int nPorts = midiIn.getNumInPorts();
     cout << "port count: " << nPorts << endl;
-    midiIn.listPorts(); // via instance
+    midiIn.listInPorts(); // via instance
 }
 
 
@@ -396,26 +394,28 @@ int ofxKorgNanoKontrol::getVal(int _control,int _type, int _sceneId) {
     if(_type == K_TYPE_SLIDER)
         return sliderVals[_control].val;
     
-    if(_type == K_TYPE_POT)
+    else if(_type == K_TYPE_POT)
         return potVals[_control].val;
     
-    if(_type == K_TYPE_BUTTON)
+    else if(_type == K_TYPE_BUTTON)
         return buttonVals[_control].val;
     
-    if(_type == K_TYPE_MENU_BUTTONS)
+    else if(_type == K_TYPE_MENU_BUTTONS)
         return kontrolVals[_control].val;
+    else
+        return 0;
 }
 
 int ofxKorgNanoKontrol::getSliderVal(int _control,int _sceneId) {
-    
+    return 0;
 }
 
 int ofxKorgNanoKontrol::getPotVal(int _control,int _sceneId) {
-    
+    return 0;
 }
 
 int ofxKorgNanoKontrol::getButtonVal(int _control,int _sceneId) {
-    
+    return 0;
 }
 /*
  void ofxKorgNanoKontrol::exit() {

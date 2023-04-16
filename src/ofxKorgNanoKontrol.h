@@ -109,7 +109,7 @@ public:
     int getVal(int _control, int _type = K_TYPE_SLIDER, int _sceneId = 1);
     
     void setup(bool autoSet = false, int _portNum = 0);
-    void showGui(bool _showGui);
+    void showGui(bool _showGui, int posX = 0, int posY = 0);
 
     ofEvent<int> sceneButtonPressed;
     ofEvent<int> pushButtonPressed;
